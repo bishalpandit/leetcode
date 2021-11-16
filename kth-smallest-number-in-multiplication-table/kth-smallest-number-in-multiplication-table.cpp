@@ -6,24 +6,7 @@ class Solution {
         
         for(int i=1; i<=m; i++) {
             
-            int ans = 0;
-            int lo = i, hi = i*n;
-            
-            while(lo <= hi)   {
-                
-                int mid = lo + (hi - lo)/2;
-                
-                if(mid <= guess) {
-                    ans = mid;
-                    lo = mid + 1;
-                }
-                
-                else
-                    hi =  mid - 1;
-                    
-            }
-           // cout << ans << " ";
-            cnt = cnt + (ans/i);
+            cnt += min(guess/i, n);
         }
         
         return cnt;
