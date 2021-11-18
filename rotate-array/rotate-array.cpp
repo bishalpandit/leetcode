@@ -1,21 +1,20 @@
 class Solution {
 public:
     void rotate(vector<int>& nums, int k) {
+        int n = nums.size();
+        k = k%n;
         
-        deque<int> dq;
+        int p = n - k;
         
-        for(auto &num: nums) {
-            dq.push_back(num);
-        }
+        vector<int> temp;
         
-        while(k--) {
-            int val = dq.back(); dq.pop_back();
-            dq.push_front(val);
-        }
+        for(int i=p; i<n; i++)
+            temp.push_back(nums[i]);
         
-        for(int i=0; i<nums.size(); i++) {
-            int val = dq.front(); dq.pop_front();
-            nums[i] = val;
-        }
+        for(int i=0; i<p; i++)
+            temp.push_back(nums[i]);
+        
+        for(int i=0; i<n; i++)
+            nums[i] = temp[i];
     }
 };
