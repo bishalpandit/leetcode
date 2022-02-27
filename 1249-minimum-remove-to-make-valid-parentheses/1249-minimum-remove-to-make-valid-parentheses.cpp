@@ -17,7 +17,7 @@ public:
                 st.push({s[i],i});
         }
             
-        set<int> removeIndexesSet;
+        unordered_set<int> removeIndexesSet;
             
         while(!st.empty()) {
             removeIndexesSet.insert(st.top().second); st.pop();
