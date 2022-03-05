@@ -3,14 +3,8 @@ class Solution {
         return (i < 0 or i == m or j < 0 or j == n);
     }
     
-    vector<pair<int,int>> dirs = {{1,0},{-1,0},{0,1},{0,-1}};
-    
-    void dfs(vector<vector<int>> &grid, int i, int j, bool &isPossibleOut, vector<vector<int>> &vis, char checkDir) {
-        int m = grid.size(), n = grid[0].size();
-        
-        vis[i][j] = 1;
-        
-        switch(checkDir) {
+    void CheckFirstDirec(char firstChar, bool &isPossibleOut, int i, int j, int m, int n) {
+         switch(firstChar) {
             case 'L': 
                 if(isOutside(i, j-1, m, n))
                     isPossibleOut = true;
@@ -28,6 +22,16 @@ class Solution {
                     isPossibleOut = true;
                 break;
         }
+    }
+    
+    vector<pair<int,int>> dirs = {{1,0},{-1,0},{0,1},{0,-1}};
+    
+    void dfs(vector<vector<int>> &grid, int i, int j, bool &isPossibleOut, vector<vector<int>> &vis, char checkDir) {
+        int m = grid.size(), n = grid[0].size();
+        
+        vis[i][j] = 1;
+        
+       CheckFirstDirec(checkDir, isPossibleOut, i, j, m , n);
         if(isPossibleOut) {
             grid[i][j] = 0;
         }
