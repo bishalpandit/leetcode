@@ -19,11 +19,10 @@ public:
     Node* copyRandomList(Node* head) {
         if(!head) return NULL;
         
-        map<Node*, pair<int, int>> old_addrToIdx;
-        map<int, pair<int, Node*>> new_idxToAddr;
+        unordered_map<Node*, pair<int, int>> old_addrToIdx;
+        unordered_map<int, pair<int, Node*>> new_idxToAddr;
         
         Node* dummy = new Node(0);
-        Node* cur = dummy;
         Node* temp = head;
         int idx = 0;
         
@@ -63,7 +62,7 @@ public:
                 curNewNode->random = curRandomNode;
             }
             
-            if(idx == 0) { // Not necessary
+            if(idx == 0) { // Not necessary. We could just return the second of key-value from new_idxToAddr map
                 dummy->next = curNewNode;
             }
             
