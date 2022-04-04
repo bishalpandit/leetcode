@@ -9,28 +9,23 @@
  * };
  */
 class Solution {
-    int len(ListNode* head) {
-        if(head == NULL) return 0;
-        return 1 + len(head->next);
-    }
+
 public:
     ListNode* swapNodes(ListNode* head, int k) {
-        int n = len(head);
-        int nk = n - k + 1;
-        ListNode *n1, *n2, *h;
-        h = head;
+        ListNode *n1 = nullptr, *n2 = nullptr, *p;
+        p = head;
         
-        while(head) {
-            if(--k == 0)
-                n1 = head;
-             if(--nk == 0)
-                 n2 = head;
-            if(!nk and !k) break;
-            head = head->next;
+        while(p) {
+            n2 = (n2 == nullptr) ? nullptr : n2->next;
+            if(!--k) {
+                n1 = p;
+                n2 = head;
+            }
+            p = p->next;
         }
         
         swap(n1->val, n2->val);
         
-        return h;
+        return head;
     }
 };
