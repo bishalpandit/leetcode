@@ -4,40 +4,25 @@ public:
         if(numRows == 1)
             return s;
         
-        vector<vector<char>> zigzag;
-        int n = s.length(), i = 0;
-        int incline = 0;
+        vector<string> ans(min(numRows, (int)s.length()));
+        int rowNo = 0, goingDown = false;
         
-        while(i < n) {
-            if(!incline) {
-                vector<char> temp(numRows, '*');
-                for(int j = 0; j < numRows and i < n; j++)
-                    temp[j] = s[i++];
-                zigzag.push_back(temp);
-            } else {
-                while(i < n and incline) {
-                    vector<char> temp(numRows, '*');
-                    temp[incline] = s[i++];
-                    incline--;
-                    zigzag.push_back(temp);
-                }
-                continue;
-            }
-            incline = numRows - 2;
+        for(auto &c: s) {
+            ans[rowNo] += c;
+            if(rowNo == 0 or rowNo == numRows - 1) goingDown= !goingDown;
+            rowNo += goingDown ? 1 : -1; 
         }
         
+        string res;
         
-        string ans;
+        for(auto &str: ans)
+            res += str;
         
-        for(int i = 0; i < zigzag[0].size(); i++) 
-            for(int j = 0; j < zigzag.size(); j++)
-                if(zigzag[j][i] != '*')
-                ans += zigzag[j][i];
-        
-        return ans;
-        
+        return res;
     }
 };
 /*
-
+p    
+a
+y
 */
