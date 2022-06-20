@@ -2,7 +2,7 @@ class Solution {
 public:
     int minimumLengthEncoding(vector<string>& words) {
         int n = words.size();
-        string ans;
+        int ans = 0;
         
         for(auto &w: words)
             reverse(w.begin(), w.end());
@@ -15,18 +15,18 @@ public:
             
             while(j < words[i].size()) {
                 if(words[i][j] != words[i + 1][j]) {
-                    ans += words[i] + '#';
+                    ans += words[i].size() + 1;
                     break;
                 }
                 j++;
             }
         }
         
-        ans += words[n - 1] + '#';
+        ans += words[n - 1].size() + 1;
         
         cout << ans;
         
-        return ans.size();
+        return ans;
     }
 };
 
