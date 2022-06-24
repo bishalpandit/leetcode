@@ -11,8 +11,7 @@ public:
         }
         
         long sum = 0;
-        int mx, prev_mx;
-        
+        long mx, comp, prev_mx;
         priority_queue<int> pq;
         
         for(auto &ai: t) {
@@ -20,17 +19,20 @@ public:
             sum += ai;
         }
         
-        while(pq.top() != 1) {
+        while(true) {
             mx = pq.top(); pq.pop();
+            if(mx <= 1) break;
             
-            prev_mx = mx % (sum - mx);
-            if(sum - mx == 1) return true;
-            if(prev_mx == mx or prev_mx == 0) return false;
+            comp = sum - mx;
+            if(comp == 1) break;
             
-            sum = sum - mx + prev_mx;
+            if(mx < comp or comp == 0 or mx % comp == 0) return false;
+            
+            prev_mx = mx % comp;
+            sum = prev_mx + comp;
             pq.push(prev_mx);
         }
-      
+        
         return true;
     }
 };
