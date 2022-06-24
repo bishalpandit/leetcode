@@ -15,27 +15,21 @@ public:
         int cnt = 1;
         
         auto temp = head;
-        ListNode* next;
         
         while(temp) {
             if(cnt&1) {
                 t1->next = temp;
                 t1 = temp;
-                next = temp->next;
-                temp->next = NULL;
-                temp = next;
             }
             else {
                 t2->next = temp;
                 t2 = temp;
-                next = temp->next;
-                temp->next = NULL;
-                temp = next;
             }
             cnt++;
+            temp = temp->next;
         }
         
-        
+        t2->next = NULL;
         t1->next = dummy2->next;
         return dummy1->next;
     }
@@ -43,9 +37,8 @@ public:
 
 /*
 
-even_tail -> 0->2
-odd_tail -> 0->1
+even_tail -> 0->2->4
+odd_tail -> 0->1->3->5
 1 2 3 4 5
 
-1->2
 */
