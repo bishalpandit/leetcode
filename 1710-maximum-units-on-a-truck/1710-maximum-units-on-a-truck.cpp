@@ -8,20 +8,13 @@ public:
         
         sort(boxTypes.begin(), boxTypes.end(), comp);
         
-        int maxUnits = 0, k = 0;
+        int maxUnits = 0;
         
-        while(truckSize and k < n) {
-            int boxes = boxTypes[k].front(), units = boxTypes[k].back();
-            
-            if(truckSize >= boxes) {
-                maxUnits += boxes * units;
-                truckSize -= boxes;
-                }
-            else {
-                maxUnits += truckSize * units;
-                truckSize = 0;
-            }
-            k++;
+        for(auto &item: boxTypes) {
+            int boxesTaken = min(truckSize, item[0]);
+            truckSize -= boxesTaken;
+            maxUnits += boxesTaken * item[1];
+            if(!truckSize) return maxUnits;
         }
         
         return maxUnits;
