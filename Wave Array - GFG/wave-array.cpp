@@ -15,22 +15,8 @@ class Solution{
         // Your code here
         int i = 0, j = 0;
         
-        while(j < n - 1 and a[j] == a[j + 1]) j++;
-        
-        j++;
-        
-        int x = a[j];
-        
-        while(j < n and i < j) {
-            if(x == a[j]) {
-                swap(a[i], a[j]);
-                i++, j++;
-            }
-            else {
-                i = j;
-                j++;
-                x = a[j];
-            }
+        for(int i = 0; i < n - 1; i += 2) {
+            swap(a[i], a[i + 1]);
         }
         
         
