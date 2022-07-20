@@ -3,29 +3,36 @@ public:
     int longestConsecutive(vector<int>& nums) {
         if(nums.size() == 0) return 0;
         
-        unordered_set<int> s;
-        int ans = 0;
+        int n = nums.size(), ans = 0;
         
-        for(auto &num: nums) s.insert(num);
         
-        for(auto &num: s) {
-            int mn = num - 1, mx = num + 1;
-            
-            while(s.count(mn)) {
-                s.erase(mn);
-                mn--;
+        unordered_set<int> present, vis;
+        
+        for(auto &ai: nums)
+            present.insert(ai);
+        
+        for(auto &ai: nums) {
+            if(!vis.count(ai)) {
+                int l = 0, r = 0;
+                int numL = ai - 1, numR = ai + 1;
+                
+                while(present.count(numL)) {
+                    vis.insert(numL);
+                    numL--;
+                    l++;
+                }
+                
+                while(present.count(numR)) {
+                    vis.insert(numR);
+                    numR++;
+                    r++;
+                }
+                
+                ans = max(ans, l + r + 1);
+                
             }
-            
-            mn++;
-            
-            while(s.count(mx)) {
-                s.erase(mx);
-                mx++;
-            }
-            
-            ans = max(ans, mx - mn);
         }
-        
+    
         return ans;
     }
 };
