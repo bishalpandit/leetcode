@@ -11,38 +11,19 @@
 class Solution {
 public:
     ListNode* partition(ListNode* head, int x) {
-        if(!head or !head->next)
-            return head;
-        ListNode *dummy1 = new ListNode(0), *dummy2 = new ListNode(0), *t1, *t2, *temp;
-        t1 = dummy1, t2 = dummy2;
-        t1->next = NULL, t2->next = NULL;
-        temp = head;
-        
-        while(temp) {
-            if(temp->val < x) {
-                t1->next = new ListNode(temp->val);
-                t1 = t1->next;
-            }
-            temp = temp->next;
-        }
+        ListNode dummy1(0), dummy2(0);
+        ListNode *t1 = &dummy1, *t2 = &dummy2;
         
         while(head) {
-            if(head->val >= x) {
-                t2->next = new ListNode(head->val);
-                t2 = t2->next;
-            }
+            if(head->val < x) 
+                t1 = t1->next = head;
+            else
+                t2 = t2->next = head;
             head = head->next;
         }
+        t2->next = NULL; // Break unwanted connection.
+        t1->next = dummy2.next; // Connect list1 with list2
         
-        if(!dummy1->next)
-            return dummy2->next;
-        
-        if(!dummy2->next)
-            return dummy1->next;
-        
-        t1->next = dummy2->next;
-        dummy2->next = NULL;
-        
-        return dummy1->next;
+        return dummy1.next;
     }
 };
