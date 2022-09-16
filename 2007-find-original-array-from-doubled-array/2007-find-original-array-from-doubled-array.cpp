@@ -48,28 +48,3 @@ public:
    }
 };
 
-/*
-
-For every i, there should exist 2i.
-
-i -> 2i
-
-[2, 2, 4, 6, 11, 12, 13, 22, 26]
- *     *
- 
- isMatched[] -> bool value if ele is already matched: Stores idx
-2: [A[2] = 4]
-
-if not matched:
- if 2*val in set
-  remove one instance of 2*val from map i.e. remove idx and mark that idx as visited.  
- else
-  return []
-else
-  skip
-  
-map -> 4: [1, 2]
- 
-[2, 4, 4]
-    
-*/
